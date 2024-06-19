@@ -4,6 +4,6 @@ CREATE TABLE Users (
     password VARCHAR(255) NOT NULL,
     verificationStatus BOOLEAN DEFAULT FALSE,
     verificationCode VARCHAR(50),
-	role VARCHAR(10) NOT NULL CHECK (role IN ('Artist', 'Buyer')),
+    role VARCHAR(10) NOT NULL CHECK (role IN ('Artist', 'Buyer')),
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
