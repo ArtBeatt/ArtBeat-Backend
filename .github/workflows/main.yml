@@ -1,0 +1,77 @@
+name: ArtBeat Backend CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: artbeat
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "14"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run the tests
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Connect to PostgreSQL
+        # Runs a script that creates a PostgreSQL table, populates
+        # the table with data, and then retrieves the data.
+        run: node client.js
+        # Environment variables used by the `client.js` script to create a new PostgreSQL table.
+
+  deploy:
+        name: Deploy
+        needs: build
+        runs-on: ubuntu-latest
+
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v4
+
+          - name: Install Node.js
+            uses: actions/setup-node@v4
+            with:
+              node-version: "14"
+              cache: "npm"
+
+          - name: Install dependencies
+            run: npm install
+
+          - name: Deploy to Firebase
+            uses: w9jds/firebase-action@master
+            with:
+              args: deploy --only hosting
+            env:
+              FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
