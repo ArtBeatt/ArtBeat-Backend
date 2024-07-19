@@ -2,7 +2,7 @@
 //Kathy Tran: I was not assiged this task but I saw this in server.js so I did it
 const pool = require('db.js')
 
-function search (email){
+function getUserByEmail (email){
     pool.connect(function(err) {
         if (err) throw err;
         pool.query(`SELECT * FROM Users WHERE email = ${email}`, function (err, result, fields) {
