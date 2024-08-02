@@ -66,3 +66,10 @@ replace insert-your-password and myuser with your own password and username resp
 ![image-5](https://github.com/user-attachments/assets/de16168e-dd80-44d6-90db-c5e8eeefbcc0)
 
 
+<p align="center"><h1>Image Picker Using React-Native </h1></p>
+
+<h3>Start off by downloading expo using the command </h3>
+`npm install expo`
+
+<h3>then open the directory using the cd command in your command prompt and run the command</h3>
+`npx expo start`
