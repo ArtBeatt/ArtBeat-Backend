@@ -30,4 +30,5 @@ CREATE TABLE Posts (
     likes INT, 
     interactions_amount_10sec_viewings INT, 
     time_of_posting TIME,
+    caption CHAR(200)
 );
