@@ -8,7 +8,7 @@ createConnection().then(async (connection) => {
     const newuser = new User();
     newuser.id = 1;
     newuser.email = "a";
-    newuser.name  = "a";
+    // newuser.name  = "a";
     console.log('Users:', newuser);
 }).catch((error) => {
     console.log('Error connecting to database:', error);
