@@ -18,7 +18,7 @@ export class User {
     @Column({ type: 'varchar', length: 50, nullable: true })
     verificationCode?: string;
 
-    @Column()
+    @Column({ nullable: true })
     role?: string;
 
     @CreateDateColumn({ type: 'timestamp' })
