@@ -32,3 +32,12 @@ CREATE TABLE Posts (
     time_of_posting TIME,
     caption CHAR(200)
 );
+
+-- Hang: This table allows each user to save multiple posts, and each post to be saved by multiple users
+CREATE TABLE SavedPosts (
+    user_id INT,
+    post_id INT,
+    PRIMARY KEY (user_id, post_id),
+    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE,
+    FOREIGN KEY (post_id) REFERENCES Posts(id) ON DELETE CASCADE
+);
